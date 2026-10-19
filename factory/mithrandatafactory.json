@@ -1,0 +1,15 @@
+{
+	"name": "mithrandatafactory",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "05dc2d35-e3aa-4b86-b5b5-044a94ae899d",
+		"tenantId": "e0e82b2d-97bd-4074-9e7d-f885af7cd3de"
+	}
+}
