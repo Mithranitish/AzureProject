@@ -67,7 +67,10 @@
 						"referenceName": "DS_DL_Parquet",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "users",
+							"folder": {
+								"value": "@{pipeline().parameters.table}_cdc",
+								"type": "Expression"
+							},
 							"container": "bronze",
 							"filename": {
 								"value": "@concat(pipeline().parameters.table,'_',variables('current'))",
@@ -105,7 +108,10 @@
 						"referenceName": "DS_Json_Cdc",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "cdc",
+							"folder": {
+								"value": "@{pipeline().parameters.table}_cdc",
+								"type": "Expression"
+							},
 							"container": "bronze",
 							"filename": "cdc.json"
 						}
@@ -268,7 +274,10 @@
 									"referenceName": "DS_Json_Cdc",
 									"type": "DatasetReference",
 									"parameters": {
-										"folder": "cdc",
+										"folder": {
+											"value": "@{pipeline().parameters.table}_cdc",
+											"type": "Expression"
+										},
 										"container": "bronze",
 										"filename": "empty.json"
 									}
@@ -279,7 +288,10 @@
 									"referenceName": "DS_Json_Cdc",
 									"type": "DatasetReference",
 									"parameters": {
-										"folder": "cdc",
+										"folder": {
+											"value": "@{pipeline().parameters.table}_cdc",
+											"type": "Expression"
+										},
 										"container": "bronze",
 										"filename": "cdc.json"
 									}
