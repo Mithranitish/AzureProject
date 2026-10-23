@@ -219,7 +219,7 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": {
-									"value": "select * from @{pipeline().parameters.schema}.@{pipeline().parameters.table} where @{pipeline().parameters.cdc_col}>'@{activity('Lookup1').output.value[0].cdc}'",
+									"value": "select * from @{pipeline().parameters.schema}.@{pipeline().parameters.table} where @{pipeline().parameters.cdc_col}>'@{if(empty(pipeline().parameters.from_date),activity('Lookup1').output.value[0].cdc,pipeline().parameters.from_date\n)}'",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
@@ -256,7 +256,10 @@
 								"referenceName": "DS_DL_Parquet",
 								"type": "DatasetReference",
 								"parameters": {
-									"folder": "users",
+									"folder": {
+										"value": "@{pipeline().parameters.table}_cdc",
+										"type": "Expression"
+									},
 									"container": "bronze",
 									"filename": {
 										"value": "@concat(pipeline().parameters.table,'_',variables('current'))",
@@ -294,7 +297,10 @@
 								"referenceName": "DS_Json_Cdc",
 								"type": "DatasetReference",
 								"parameters": {
-									"folder": "cdc",
+									"folder": {
+										"value": "@{pipeline().parameters.table}_cdc",
+										"type": "Expression"
+									},
 									"container": "bronze",
 									"filename": "cdc.json"
 								}
@@ -457,7 +463,10 @@
 											"referenceName": "DS_Json_Cdc",
 											"type": "DatasetReference",
 											"parameters": {
-												"folder": "cdc",
+												"folder": {
+													"value": "@{pipeline().parameters.table}_cdc",
+													"type": "Expression"
+												},
 												"container": "bronze",
 												"filename": "empty.json"
 											}
@@ -468,7 +477,10 @@
 											"referenceName": "DS_Json_Cdc",
 											"type": "DatasetReference",
 											"parameters": {
-												"folder": "cdc",
+												"folder": {
+													"value": "@{pipeline().parameters.table}_cdc",
+													"type": "Expression"
+												},
 												"container": "bronze",
 												"filename": "cdc.json"
 											}
@@ -490,6 +502,9 @@
 						"type": "string"
 					},
 					"cdc_col": {
+						"type": "string"
+					},
+					"from_date": {
 						"type": "string"
 					}
 				},
