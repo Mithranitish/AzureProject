@@ -326,7 +326,7 @@
 					{
 						"activity": "Incremental_Ingestion_loop",
 						"dependencyConditions": [
-							"Succeeded",
+							"Skipped",
 							"Failed"
 						]
 					}
